@@ -9,7 +9,7 @@
     </select>
 
     <insert id="add" parameterType="com.fingerdance.minitiktok.pojo.User">
-        insert into user values (null, #{user.userName}, #{user.passWord})
+        insert into user values (null, #{username}, #{password})
     </insert>
 
     <select id="queryByName" resultType="com.fingerdance.minitiktok.pojo.User">
