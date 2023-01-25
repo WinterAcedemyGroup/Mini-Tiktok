@@ -15,18 +15,18 @@ public class UserServiceImpl implements UserService{
     UserRepository userRepository;
 
     @Override
-    public UserResponse register(String username, String password) throws Exception {
+    public User register(String username, String password) throws Exception {
         User query = userRepository.queryByName(username);
         if (query != null) {
             throw new Exception("该用户已存在");
         }
         User user = new User(null, username, SecurityUtils.encode(password));
         userRepository.add(user);
-        return UserResponse.success(user.getId(), JwtUtils.createToken(user));
+        return user;
     }
 
     @Override
-    public UserResponse login(String username, String password) throws Exception{
+    public User login(String username, String password) throws Exception{
         User user = userRepository.queryByName(username);
         if (user == null) {
             throw new Exception("该用户不存在");
@@ -35,7 +35,6 @@ public class UserServiceImpl implements UserService{
         if (!passwordMatches) {
             throw new Exception("用户名或密码错误");
         }
-
-        return UserResponse.success(user.getId(), JwtUtils.createToken(user));
+        return user;
     }
 }
