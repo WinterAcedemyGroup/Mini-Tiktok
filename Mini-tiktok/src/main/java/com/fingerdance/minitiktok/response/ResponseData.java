@@ -1,8 +1,12 @@
 package com.fingerdance.minitiktok.response;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Data;
 
 @Data
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class ResponseData<T> {
 
     /**
@@ -20,6 +24,7 @@ public class ResponseData<T> {
     /**
      * 响应数据
      **/
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private T data;
 
     /**
