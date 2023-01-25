@@ -8,8 +8,8 @@
         select * from user
     </select>
 
-    <insert id="add" parameterType="com.fingerdance.minitiktok.pojo.User">
-        insert into user values (null, #{username}, #{password})
+    <insert id="add" parameterType="com.fingerdance.minitiktok.pojo.User" useGeneratedKeys="true" keyProperty="id">
+        insert into user values (null, #{userName}, #{passWord})
     </insert>
 
     <select id="queryByName" resultType="com.fingerdance.minitiktok.pojo.User">
