@@ -1,39 +1,31 @@
 package com.fingerdance.minitiktok.response;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Data;
 
 @Data
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class ResponseData<T> {
 
     /**
      * 结果状态 ,具体状态码参见ResponseCode
      */
-    private int status;
+    private long statusCode;
+
 
 
     /**
      * 响应消息
      **/
-    private String message;
+    private String statusMsg;
 
     /**
      * 响应数据
      **/
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private T data;
-
-    /**
-     * 接口请求时间
-     **/
-    private long timestamp;
-
-
-    /**
-     * 初始化，增加接口请求事件
-     */
-    public ResponseData() {
-        this.timestamp = System.currentTimeMillis();
-    }
-
 
     /**
      * 成功
@@ -43,8 +35,8 @@ public class ResponseData<T> {
      */
     public static <T> ResponseData<T> success() {
         ResponseData<T> resultData = new ResponseData<>();
-        resultData.setStatus(ResponseCode.RC200.getCode());
-        resultData.setMessage(ResponseCode.RC200.getMessage());
+        resultData.setStatusCode(ResponseCode.RC200.getCode());
+        resultData.setStatusMsg(ResponseCode.RC200.getMessage());
         return resultData;
     }
 
@@ -57,8 +49,8 @@ public class ResponseData<T> {
      */
     public static <T> ResponseData<T> success(String message) {
         ResponseData<T> resultData = new ResponseData<>();
-        resultData.setStatus(ResponseCode.RC200.getCode());
-        resultData.setMessage(message);
+        resultData.setStatusCode(ResponseCode.RC200.getCode());
+        resultData.setStatusMsg(message);
         return resultData;
     }
 
@@ -71,8 +63,8 @@ public class ResponseData<T> {
      */
     public static <T> ResponseData<T> success(T data) {
         ResponseData<T> resultData = new ResponseData<>();
-        resultData.setStatus(ResponseCode.RC200.getCode());
-        resultData.setMessage(ResponseCode.RC200.getMessage());
+        resultData.setStatusCode(ResponseCode.RC200.getCode());
+        resultData.setStatusMsg(ResponseCode.RC200.getMessage());
         resultData.setData(data);
         return resultData;
     }
@@ -86,8 +78,8 @@ public class ResponseData<T> {
      */
     public static <T> ResponseData<T> fail(String message) {
         ResponseData<T> resultData = new ResponseData<>();
-        resultData.setStatus(ResponseCode.RC999.getCode());
-        resultData.setMessage(message);
+        resultData.setStatusCode(ResponseCode.RC999.getCode());
+        resultData.setStatusMsg(message);
         return resultData;
     }
 
@@ -101,8 +93,8 @@ public class ResponseData<T> {
      */
     public static <T> ResponseData<T> fail(int code, String message) {
         ResponseData<T> resultData = new ResponseData<>();
-        resultData.setStatus(code);
-        resultData.setMessage(message);
+        resultData.setStatusCode(code);
+        resultData.setStatusMsg(message);
         return resultData;
     }
 
@@ -114,8 +106,8 @@ public class ResponseData<T> {
      */
     public static <T> ResponseData<T> fail() {
         ResponseData<T> resultData = new ResponseData<>();
-        resultData.setStatus(ResponseCode.RC999.getCode());
-        resultData.setMessage(ResponseCode.RC999.getMessage());
+        resultData.setStatusCode(ResponseCode.RC999.getCode());
+        resultData.setStatusMsg(ResponseCode.RC999.getMessage());
         return resultData;
     }
 

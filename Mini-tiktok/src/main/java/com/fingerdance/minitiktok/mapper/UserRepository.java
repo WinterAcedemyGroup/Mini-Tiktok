@@ -13,7 +13,7 @@ public interface UserRepository {
     public List<User> queryAll();
 
     //添加数据
-    public int add(@Param("user") User user);
+    public int add(User user);
 
     //根据用户名查询数据
     public User queryByName(String username);
