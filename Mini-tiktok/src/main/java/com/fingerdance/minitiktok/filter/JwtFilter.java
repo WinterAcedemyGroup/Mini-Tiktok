@@ -14,7 +14,7 @@ import java.util.Map;
  * JWT过滤器，拦截 /secure的请求
  */
 @Slf4j
-@WebFilter(filterName = "JwtFilter", urlPatterns = {""})
+@WebFilter(filterName = "JwtFilter", urlPatterns = {"/favorite/*"})
 public class JwtFilter implements Filter
 {
     @Override
